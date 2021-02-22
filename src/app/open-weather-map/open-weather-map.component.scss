@@ -30,15 +30,7 @@
     right: 1rem;
     top: 1rem;
 }
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox.
-     Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-}
 
-.example-action-button {
-    margin-bottom: 8px;
-}
 .mat-toolbar.mat-primary {
     background: #FFC900;
     color: #fff;
