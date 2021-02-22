@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { ForecastData } from '../core/model/forecast-data.model';
 import { ForecastDetails } from '../core/model/forecast-details.model';
 import { WeatherData } from '../core/model/weather-data.model';
@@ -12,7 +14,6 @@ import { ForecastService } from '../core/services/forecast.service';
     styleUrls: ['./open-weather-map.component.scss'],
 })
 export class OpenWeatherMapComponent implements OnInit {
-
     // Declarações
     title = 'Weather App';
     listFilter: any;
@@ -27,7 +28,9 @@ export class OpenWeatherMapComponent implements OnInit {
     Serviço de previsão injetada
     */
     constructor(
-        private forecastService: ForecastService
+        private forecastService: ForecastService,
+        private angularfire: AngularFireAuth,
+        private router: Router
     ) {}
 
     ngOnInit(): void {
@@ -72,12 +75,14 @@ export class OpenWeatherMapComponent implements OnInit {
     }
 
     private getCurrentIpLocation(): void {
-        this.forecastService.getCurrentIpLocation().subscribe( res => {
+        this.forecastService.getCurrentIpLocation().subscribe((res) => {
             this.city = `${res.geoplugin_city}, ${res.geoplugin_regionCode}, ${res.geoplugin_countryName}`;
             this.listFilter = this.city;
-            this.forecastService.loadCurrentWeather(this.city).subscribe( res => {
-                this.setWeather(res);
-            });
+            this.forecastService
+                .loadCurrentWeather(this.city)
+                .subscribe((res) => {
+                    this.setWeather(res);
+                });
         });
     }
 
@@ -95,5 +100,10 @@ export class OpenWeatherMapComponent implements OnInit {
     // Função para alternar o tema.
     toggleTheme(): void {
         this.isDark = !this.isDark;
+    }
+
+    logout(): void {
+        this.angularfire.signOut();
+        this.router.navigate(['login']);
     }
 }
