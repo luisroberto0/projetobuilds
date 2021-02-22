@@ -1,0 +1,22 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <mat-card class="box">
+        <ngx-auth-firebaseui-register
+            [logoUrl]="logoUrl"
+            [titleText]="titleText"
+            [nameText]="nameText"
+            [emailText]="emailText"
+            [passwordText]="passwordText"
+            [passwordConfirmationText]="passwordConfirmationText"
+            [passwordConfirmationErrorRequiredText]="passwordConfirmationErrorRequiredText"
+            [alreadyHaveAccountText]="alreadyHaveAccountText"
+            [emailErrorPatternText]="emailErrorPatternText"
+            [emailErrorRequiredText]="emailErrorRequiredText"
+            [passwordErrorRequiredText]="passwordErrorRequiredText"
+            [createAccountButtonText]="createAccountButtonText"
+            [nameErrorRequiredText]="nameErrorRequiredText"
+            [passwordErrorMinLengthText]="passwordErrorMinLengthText"
+            (onLoginRequested)="onSuccessLogin()"
+            (onCreateAccountButtonClicked)="onLoginRequested()"
+        ></ngx-auth-firebaseui-register>
+    </mat-card>
+</div>
